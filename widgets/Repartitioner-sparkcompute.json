@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "spec-version": "1.0"
+  },
+  "configuration-groups": [
+    {
+      "label": "Repartitioner Configuration",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "Partitions",
+          "name": "partitions",
+          "widget-attributes" : {
+            "default" : "1",
+            "placeholder" : "Number of partitions to be created for each window."
+          }
+        },
+        {
+          "widget-type" : "select",
+          "label": "Shuffle data",
+          "name": "shuffle",
+          "widget-attributes" : {
+            "default" : "False",
+            "values" : [
+              "True",
+              "False"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": []
+}
