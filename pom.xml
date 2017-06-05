@@ -20,7 +20,7 @@
 
   <groupId>co.cask</groupId>
   <artifactId>repartitioner</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <name>Repartitioner of RDD</name>
@@ -35,7 +35,7 @@
     <hadoop.version>2.3.0</hadoop.version>
     <widgets.dir>widgets</widgets.dir>
     <docs.dir>docs</docs.dir>
-    <etl.versionRange>[4.0.0,10.0.0-SNAPSHOT)</etl.versionRange>
+    <etl.versionRange>[4.0.0,5.0.0-SNAPSHOT)</etl.versionRange>
     <main.basedir>${project.basedir}</main.basedir>
   </properties>
 
