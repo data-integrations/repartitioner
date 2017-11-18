@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/hydrator/repartitioner.svg?branch=develop)](https://travis-ci.org/hydrator/repartitioner) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 =======
 <a href="https://cdap-users.herokuapp.com/"><img alt="Join CDAP community" src="https://cdap-users.herokuapp.com/badge.svg?t=repartitioner"/></a> [![Build Status](https://travis-ci.org/hydrator/repartitioner.svg?branch=develop)](https://travis-ci.org/hydrator/repartitioner) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-<img  alt="Cask Market Availability" src="https://cdap-users.herokuapp.com/assets/cm-notavailable.svg"/>
-<img  alt="CDAP Spark Compute" src="https://cdap-users.herokuapp.com/assets/cdap-sparkcompute.svg"/>
+[![cm-available](https://cdap-users.herokuapp.com/assets/cm-available.svg)](https://docs.cask.co/cdap/current/en/integrations/cask-market.html) <img  alt="CDAP Spark Compute" src="https://cdap-users.herokuapp.com/assets/cdap-sparkcompute.svg"/>
 
 # Repartitioner
 
