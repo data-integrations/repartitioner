@@ -1,7 +1,7 @@
-
 [![Build Status](https://travis-ci.org/hydrator/repartitioner.svg?branch=develop)](https://travis-ci.org/hydrator/repartitioner) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-<img  alt="Cask Market Availability" src="https://cdap-users.herokuapp.com/assets/cm-notavailable.svg"/>
-<img  alt="CDAP Spark Compute" src="https://cdap-users.herokuapp.com/assets/cdap-sparkcompute.svg"/>
+=======
+<a href="https://cdap-users.herokuapp.com/"><img alt="Join CDAP community" src="https://cdap-users.herokuapp.com/badge.svg?t=repartitioner"/></a> [![Build Status](https://travis-ci.org/hydrator/repartitioner.svg?branch=develop)](https://travis-ci.org/hydrator/repartitioner) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![cm-available](https://cdap-users.herokuapp.com/assets/cm-available.svg)](https://docs.cask.co/cdap/current/en/integrations/cask-market.html) <img  alt="CDAP Spark Compute" src="https://cdap-users.herokuapp.com/assets/cdap-sparkcompute.svg"/>
 
 # Repartitioner
 
@@ -68,7 +68,7 @@ to the users.
 
 # License and Trademarks
 
-Copyright © 2016-2017 Cask Data, Inc.
+Copyright © 2016-2019 Cask Data, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 in compliance with the License. You may obtain a copy of the License at
@@ -84,7 +84,4 @@ Cask is a trademark of Cask Data, Inc. All rights reserved.
 
 Apache, Apache HBase, and HBase are trademarks of The Apache Software Foundation. Used with
 permission. No endorsement by The Apache Software Foundation is implied by the use of these marks.
-
-.. |(Hydrator)| image:: http://cask.co/wp-content/uploads/hydrator_logo_cdap1.png
-
 

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Cask Data, Inc.
+ * Copyright © 2017-2019 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,25 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package co.cask;
+package io.cdap.plugin.repartitioner;
 
-import co.cask.cdap.api.annotation.Description;
-import co.cask.cdap.api.annotation.Macro;
-import co.cask.cdap.api.annotation.Name;
-import co.cask.cdap.api.annotation.Plugin;
-import co.cask.cdap.api.data.format.StructuredRecord;
-import co.cask.cdap.api.plugin.PluginConfig;
-import co.cask.cdap.etl.api.PipelineConfigurer;
-import co.cask.cdap.etl.api.batch.SparkCompute;
-import co.cask.cdap.etl.api.batch.SparkExecutionPluginContext;
+import io.cdap.cdap.api.annotation.Description;
+import io.cdap.cdap.api.annotation.Macro;
+import io.cdap.cdap.api.annotation.Name;
+import io.cdap.cdap.api.annotation.Plugin;
+import io.cdap.cdap.api.data.format.StructuredRecord;
+import io.cdap.cdap.api.plugin.PluginConfig;
+import io.cdap.cdap.etl.api.PipelineConfigurer;
+import io.cdap.cdap.etl.api.batch.SparkCompute;
+import io.cdap.cdap.etl.api.batch.SparkExecutionPluginContext;
 import org.apache.spark.api.java.JavaRDD;
 
 /**
- * Repartitioner Spark Compute Plugin
+ * Repartitioner Spark Compute Plugin.
  */
 @Plugin(type = SparkCompute.PLUGIN_TYPE)
 @Name(Repartitioner.PLUGIN_NAME)
-@Description("Repartitions a RDD.")
+@Description("Repartitions an RDD.")
 public class Repartitioner extends SparkCompute<StructuredRecord, StructuredRecord> {
 
   public static final String PLUGIN_NAME = "Repartitioner";
@@ -46,9 +46,7 @@ public class Repartitioner extends SparkCompute<StructuredRecord, StructuredReco
     super.configurePipeline(pipelineConfigurer);
 
     if (config.getPartitions(1) > 0) {
-      throw new IllegalArgumentException(
-        String.format("Number of partitions should be greater than zero.")
-      );
+      throw new IllegalArgumentException("Number of partitions should be greater than zero.");
     }
   }
 
@@ -59,13 +57,14 @@ public class Repartitioner extends SparkCompute<StructuredRecord, StructuredReco
 
   @Override
   public JavaRDD<StructuredRecord> transform(SparkExecutionPluginContext context,
-                                             JavaRDD<StructuredRecord> input) throws Exception {
+                                             JavaRDD<StructuredRecord> input) {
     return input.coalesce(config.getPartitions(input.getNumPartitions()), config.getShuffle());
   }
 
   /**
    * Configuration for the Repartitioner Plugin.
    */
+  @SuppressWarnings("unused")
   public static class Config extends PluginConfig {
     @Name("partitions")
     @Description("Number of partitions the input RDD should be repartitioned into.")
@@ -88,6 +87,5 @@ public class Repartitioner extends SparkCompute<StructuredRecord, StructuredReco
     public boolean getShuffle() {
       return Boolean.parseBoolean(shuffle);
     }
-
   }
 }
