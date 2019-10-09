@@ -7,11 +7,11 @@
       "label": "Repartitioner Configuration",
       "properties": [
         {
-          "widget-type": "textbox",
+          "widget-type": "number",
           "label": "Partitions",
           "name": "partitions",
           "widget-attributes" : {
-            "default" : "1",
+            "default": 1,
             "placeholder" : "Number of partitions to be created for each window."
           }
         },

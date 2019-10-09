@@ -16,11 +16,10 @@
 package io.cdap.plugin.repartitioner;
 
 import io.cdap.cdap.api.annotation.Description;
-import io.cdap.cdap.api.annotation.Macro;
 import io.cdap.cdap.api.annotation.Name;
 import io.cdap.cdap.api.annotation.Plugin;
 import io.cdap.cdap.api.data.format.StructuredRecord;
-import io.cdap.cdap.api.plugin.PluginConfig;
+import io.cdap.cdap.etl.api.FailureCollector;
 import io.cdap.cdap.etl.api.PipelineConfigurer;
 import io.cdap.cdap.etl.api.batch.SparkCompute;
 import io.cdap.cdap.etl.api.batch.SparkExecutionPluginContext;
@@ -35,19 +34,17 @@ import org.apache.spark.api.java.JavaRDD;
 public class Repartitioner extends SparkCompute<StructuredRecord, StructuredRecord> {
 
   public static final String PLUGIN_NAME = "Repartitioner";
-  private Config config;
+  private RepartitionerConfig config;
 
-  public Repartitioner(Config config) {
+  public Repartitioner(RepartitionerConfig config) {
     this.config = config;
   }
 
   @Override
   public void configurePipeline(PipelineConfigurer pipelineConfigurer) throws IllegalArgumentException {
     super.configurePipeline(pipelineConfigurer);
-
-    if (config.getPartitions(1) > 0) {
-      throw new IllegalArgumentException("Number of partitions should be greater than zero.");
-    }
+    FailureCollector failureCollector = pipelineConfigurer.getStageConfigurer().getFailureCollector();
+    config.validate(failureCollector);
   }
 
   @Override
@@ -58,34 +55,10 @@ public class Repartitioner extends SparkCompute<StructuredRecord, StructuredReco
   @Override
   public JavaRDD<StructuredRecord> transform(SparkExecutionPluginContext context,
                                              JavaRDD<StructuredRecord> input) {
-    return input.coalesce(config.getPartitions(input.getNumPartitions()), config.getShuffle());
-  }
+    FailureCollector failureCollector = context.getFailureCollector();
+    config.validate(failureCollector);
+    failureCollector.getOrThrowException();
 
-  /**
-   * Configuration for the Repartitioner Plugin.
-   */
-  @SuppressWarnings("unused")
-  public static class Config extends PluginConfig {
-    @Name("partitions")
-    @Description("Number of partitions the input RDD should be repartitioned into.")
-    @Macro
-    private String partitions;
-
-    @Name("shuffle")
-    @Description("Specifies whether the records have to be shuffled.")
-    @Macro
-    private String shuffle;
-
-    public int getPartitions(int defaultValue) {
-      try {
-        return Integer.parseInt(partitions);
-      } catch (NumberFormatException e) {
-        return defaultValue;
-      }
-    }
-
-    public boolean getShuffle() {
-      return Boolean.parseBoolean(shuffle);
-    }
+    return input.coalesce(config.getPartitions(), config.getShuffle());
   }
 }
