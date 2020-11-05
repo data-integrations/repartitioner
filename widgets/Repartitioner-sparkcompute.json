@@ -11,20 +11,23 @@
           "label": "Partitions",
           "name": "partitions",
           "widget-attributes" : {
-            "default": 1,
-            "placeholder" : "Number of partitions to be created for each window."
+            "default": 1
           }
         },
         {
-          "widget-type" : "select",
-          "label": "Shuffle data",
+          "widget-type": "toggle",
           "name": "shuffle",
-          "widget-attributes" : {
-            "default" : "False",
-            "values" : [
-              "True",
-              "False"
-            ]
+          "label": "Shuffle Data",
+          "widget-attributes": {
+            "default": "true",
+            "on": {
+              "value": "true",
+              "label": "True"
+            },
+            "off": {
+              "value": "false",
+              "label": "False"
+            }
           }
         }
       ]

@@ -83,10 +83,6 @@ public class RepartitionerConfig extends PluginConfig {
     private Builder() {
     }
 
-    public static Builder aRepartitionerConfig() {
-      return new Builder();
-    }
-
     public Builder setPartitions(Integer partitions) {
       this.partitions = partitions;
       return this;

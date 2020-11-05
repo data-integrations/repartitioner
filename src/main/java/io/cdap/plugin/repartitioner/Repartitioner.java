@@ -30,7 +30,7 @@ import org.apache.spark.api.java.JavaRDD;
  */
 @Plugin(type = SparkCompute.PLUGIN_TYPE)
 @Name(Repartitioner.PLUGIN_NAME)
-@Description("Repartitions an RDD.")
+@Description("Repartitions data in order to change the maximum level of parallelism")
 public class Repartitioner extends SparkCompute<StructuredRecord, StructuredRecord> {
 
   public static final String PLUGIN_NAME = "Repartitioner";
@@ -45,11 +45,6 @@ public class Repartitioner extends SparkCompute<StructuredRecord, StructuredReco
     super.configurePipeline(pipelineConfigurer);
     FailureCollector failureCollector = pipelineConfigurer.getStageConfigurer().getFailureCollector();
     config.validate(failureCollector);
-  }
-
-  @Override
-  public void initialize(SparkExecutionPluginContext context) throws Exception {
-    super.initialize(context);
   }
 
   @Override
