@@ -21,6 +21,7 @@ import io.cdap.cdap.api.annotation.Plugin;
 import io.cdap.cdap.api.data.format.StructuredRecord;
 import io.cdap.cdap.etl.api.FailureCollector;
 import io.cdap.cdap.etl.api.PipelineConfigurer;
+import io.cdap.cdap.etl.api.StageConfigurer;
 import io.cdap.cdap.etl.api.batch.SparkCompute;
 import io.cdap.cdap.etl.api.batch.SparkExecutionPluginContext;
 import org.apache.spark.api.java.JavaRDD;
@@ -43,8 +44,10 @@ public class Repartitioner extends SparkCompute<StructuredRecord, StructuredReco
   @Override
   public void configurePipeline(PipelineConfigurer pipelineConfigurer) throws IllegalArgumentException {
     super.configurePipeline(pipelineConfigurer);
-    FailureCollector failureCollector = pipelineConfigurer.getStageConfigurer().getFailureCollector();
+    StageConfigurer stageConfigurer = pipelineConfigurer.getStageConfigurer();
+    FailureCollector failureCollector = stageConfigurer.getFailureCollector();
     config.validate(failureCollector);
+    stageConfigurer.setOutputSchema(stageConfigurer.getInputSchema());
   }
 
   @Override
